@@ -1,4 +1,4 @@
-# Motorola-test
+# M-test
 ZC Exercises
 C/C++ libvirt exercise
 
