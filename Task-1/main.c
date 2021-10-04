@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <libvirt/libvirt.h>
 
-char * state_name(int state_num){
-  switch(state_num){
+
+char * state_name(int *state_num){
+  switch(*state_num){
     case VIR_DOMAIN_NOSTATE:
       return "No State";
     case VIR_DOMAIN_RUNNING:
@@ -29,17 +30,16 @@ int main()
   int ret;
   virConnectPtr conn;
   virDomainPtr *domains;
-  virNetwork;
   conn = virConnectOpenReadOnly("qemu:///system");
-  ret = virConnectListAllDomains(conn, &domains,0)
+  ret = virConnectListAllDomains(conn, &domains,0);
   if (ret < 0) {
     return ret;
   }
-  int dstates [ret];
-  char *dnames [ret];
+  int *dstates [ret];
+  const char *dnames [ret];
   int if_err;
   printf(" Domain Name\tState\n________________________\n");
-  for (i = 0; i < ret; i++){
+  for (int i = 0; i < ret; i++){
     if_err = virDomainGetState(domains[i],dstates[i],NULL,0);
     if (if_err == -1){
       printf("Unable to obtain domain state");
